@@ -12,7 +12,6 @@ import (
 
   "github.com/diamondburned/arikawa/v2/gateway"
 	"github.com/diamondburned/arikawa/v2/session"
-	"github.com/diamondburned/arikawa/v2/utils/wsutil"
   "github.com/joho/godotenv"
 )
 
@@ -36,13 +35,6 @@ func main() {
   }
   log.Println(string(url))
 
-  log.Println("Getting BotURL...")
-  burl, err := gateway.BotURL(token)
-  if err != nil {
-    log.Fatalln("BotURL could not be retrived...", err)
-  }
-  log.Println(burl.URL)
-
   log.Println("Making session")
 	s, err := session.New(token)
 	if err != nil {
@@ -51,7 +43,6 @@ func main() {
 	// login
 	log.Println("Session made")
 
-	wsutil.WSDebug("Adding handler")
 	log.Println("Add handler")
 	s.AddHandler(func(c *gateway.MessageCreateEvent) {
 		if strings.HasPrefix(c.Content, "#") || strings.HasPrefix(c.Content, "~M") {
@@ -150,7 +141,6 @@ func main() {
 	})
 
 	// Add the needed Gateway intents.
-	wsutil.WSDebug("Adding intents")
 	log.Println("Adding intents")
 	s.Gateway.AddIntents(gateway.IntentGuildMessages)
 
@@ -171,6 +161,6 @@ func main() {
 	log.Println("Started as", u.Username)
 
 	// Block forever.
-	log.Println("Blocking forever...")
+	//log.Println("Blocking forever...")
 	select {}
 }
