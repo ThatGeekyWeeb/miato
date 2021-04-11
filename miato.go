@@ -2,17 +2,17 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"log"
-	"strings"
-	"time"
-	"syscall"
+	"os"
 	"os/signal"
 	"strconv"
+	"strings"
+	"syscall"
+	"time"
 
-  "github.com/diamondburned/arikawa/v2/gateway"
+	"github.com/diamondburned/arikawa/v2/gateway"
 	"github.com/diamondburned/arikawa/v2/session"
-  "github.com/joho/godotenv"
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -20,22 +20,22 @@ func main() {
 	signal.Ignore(syscall.SIGTERM)
 	signal.Ignore(os.Interrupt)
 
-  err := godotenv.Load("./.env")
-  if err != nil {
-    log.Fatalln("Could not read .env file...", err)
-  }
+	err := godotenv.Load("./.env")
+	if err != nil {
+		log.Fatalln("Could not read .env file...", err)
+	}
 
-  var token = os.Getenv("TOKEN")
+	var token = os.Getenv("TOKEN")
 	//var funcs = [5]string{"ping","uid","help","ar","color"}
 
-  log.Println("Getting gatewayURL...")
-  url, err := gateway.URL()
-  if err != nil {
-    log.Fatalln("Could not get Websocket URL..", err)
-  }
-  log.Println(string(url))
+	log.Println("Getting gatewayURL...")
+	url, err := gateway.URL()
+	if err != nil {
+		log.Fatalln("Could not get Websocket URL..", err)
+	}
+	log.Println(string(url))
 
-  log.Println("Making session")
+	log.Println("Making session")
 	s, err := session.New(token)
 	if err != nil {
 		log.Fatalln("Session failed:", err)
