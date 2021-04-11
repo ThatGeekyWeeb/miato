@@ -6,8 +6,8 @@ import (
 	"log"
 	"strings"
 	"time"
-	//"syscall"
-	//"os/signal"
+	"syscall"
+	"os/signal"
 	"strconv"
 
   "github.com/diamondburned/arikawa/v2/gateway"
@@ -16,9 +16,9 @@ import (
 )
 
 func main() {
-	//signal.Ignore(syscall.SIGHUP)
-	//signal.Ignore(syscall.SIGTERM)
-	//signal.Ignore(os.Interrupt)
+	signal.Ignore(syscall.SIGHUP)
+	signal.Ignore(syscall.SIGTERM)
+	signal.Ignore(os.Interrupt)
 
   err := godotenv.Load("./.env")
   if err != nil {
